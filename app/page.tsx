@@ -65,7 +65,7 @@ const amateurStories: Story[] = [
       "경남고와의 준결승. 1회 이정후의 출루 뒤 김대한이 우전 안타로 기회를 이었다. 휘문고는 초반 3점을 만들고 결승에 진출했고, 김대한은 1학년부터 우승팀의 중심에 있었다.",
     url: "https://v.daum.net/v/20160815222649568",
     image:
-      "https://img1.daumcdn.net/thumb/S1200x630/?fname=https://t1.daumcdn.net/news/201608/15/hankooki/20160815222648738gwto.jpg",
+      "https://t1.daumcdn.net/news/201608/15/hankooki/20160815222648961qnze.jpg",
     credit: "사진 한국일보 오대근 기자",
   },
   {
