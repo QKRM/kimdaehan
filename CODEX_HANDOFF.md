@@ -13,7 +13,8 @@
 
 - GitHub 저장소: https://github.com/QKRM/kimdaehan
 - GitHub Pages: https://qkrm.github.io/kimdaehan/
-- `main` 브랜치에 푸시하면 `.github/workflows/pages.yml`이 자동 배포합니다.
+- GitHub Pages는 `main` 브랜치의 루트 폴더를 배포합니다.
+- 수정 후 `GITHUB_PAGES=true`, `NEXT_PUBLIC_SITE_URL=https://qkrm.github.io` 환경에서 `npm run build:pages`를 실행하고 `out`의 결과물을 저장소 루트에 반영한 뒤 푸시합니다.
 
 ## 프로젝트 구조
 
