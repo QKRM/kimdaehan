@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 
 const refrain =
   "김대한그는누구인가2000년생으로서울특별시에서태어나고등학교시절1학년부터주전을꿰차며4할6푼대타율로이부분2위에올랐다시즌말까지당시3학년선배김혜성과이영민타격상을두고경쟁을치뤘으나당시타율0.4이승엽이더높았고20타석가량더들어선김혜성에게아쉽게밀렸다1학년따리가3학년그것도후에메이저리그포스팅을선언할진짜재능에게비볐다는소리다더군다나당시출루율장타율OPS는더높을정도로엄청난모습을보였다.2018년에는타율5할OPS1.502를기록하며백인천타격상을수상했다참고로2021년에이상을받은김도영의타율.428OPS1.128보다훨씬높았던것이다거기다조야제약프로야구시상식에서아마추어MVP를받기도했다이활약은청소년대표팀에서도이어졌는데후에홈런왕이되는노시환을제끼고청소년국가대표4번타자를먹었으며슈퍼라운드한일전에는지금까지회자되는쓰리런홈런이자그경기결승타를때려내는데때려낸투수가바로당해고시엔의최고스타요시다코에이였다이에당당히서울1번으로두산베어스1차지명을받았고3억5천만원으로당해최고액을받았는데참고로2024년신인김택연과황준서가3억5천으로똑같은금액을받았다배트스피드는정상급이라는평가를받아김태형에게존나칭찬받았으며당시고교야구를본모두가무조건터질선수이새끼가안터지면안된다라는평가를받았다파워수비어깨주루등등모든부분에서툴이있다는평가를받은파이브툴플레이어라고평가받았다프로에들어와2019년시즌내내안타를때려내지못하고군대행2022년돌아와7월3일KT이채호를상대로데뷔첫안타를때려냈으며물오른타격감을보이며7월12일신민혁을상대로데뷔첫홈런을때려냈다김대한의OPS는두산베어스한시대를빛냈던박건우김재환오재일김재호동나이대와비교해봤을때월등했던수준이었으며시즌마지막경기김태형의마지막경기오XX의은퇴식이있던날솔로홈런을때려내며두산팬들의희망임을입증했다";
@@ -16,6 +16,15 @@ type Story = {
   url: string;
   image: string;
   credit: string;
+};
+
+type NotableGame = {
+  date: string;
+  label: string;
+  title: string;
+  detail: string;
+  videoId: string;
+  source: string;
 };
 
 const amateurStories: Story[] = [
@@ -427,10 +436,104 @@ const proStories: Story[] = [
     image: "https://file.sportsseoul.com/news/cms/2026/01/19/news-p.v1.20260115.883743f236104470baedcab4fcd54722_P1.jpg",
     credit: "사진 스포츠서울",
   },
+  {
+    date: "2026. 07. 31",
+    year: "2026",
+    source: "KBO · BEARS TV",
+    title: "잠실을 두 번 넘긴 밤",
+    kicker: "LG전 · 데뷔 첫 멀티 홈런",
+    summary:
+      "시즌 첫 홈런으로 동점을 만든 뒤, 다시 한 번 거대한 타구를 잠실 외야 너머로 보냈다. 프로 데뷔 후 처음 완성한 한 경기 두 개의 홈런. 오래 기다린 장타 재능이 한밤에 연달아 폭발했다.",
+    quote: "대한의 시간은 지금부터.",
+    url: "https://www.youtube.com/watch?v=-LffBYuiJ4c",
+    image: "https://i.ytimg.com/vi/-LffBYuiJ4c/maxresdefault.jpg",
+    credit: "영상 KBO · 관련 영상 BEARS TV",
+  },
 ];
 
 const stories = [...amateurStories, ...proStories];
 const years = ["2016", "2018", "2019", "2022", "2024", "2026"];
+
+const notableGames: NotableGame[] = [
+  {
+    date: "2022. 07. 12",
+    label: "THE FIRST",
+    title: "첫 홈런부터\n역전 스리런",
+    detail: "NC 신민혁의 초구를 당겨 만든 125m 아치. 프로 첫 홈런이 경기의 흐름을 뒤집었다.",
+    videoId: "i5ptDzfXTbU",
+    source: "베어스 아카이브",
+  },
+  {
+    date: "2023. 06. 06",
+    label: "THE RETURN",
+    title: "재활 끝,\n잠실의 아치",
+    detail: "중수골 골절을 딛고 돌아와 현충일 잠실 하늘에 그린 시즌 첫 홈런.",
+    videoId: "V0Fhi4nUOa0",
+    source: "BEARS TV",
+  },
+  {
+    date: "2024. 06. 19",
+    label: "THE POWER",
+    title: "카스타노를 넘긴\n시즌 첫 홈런",
+    detail: "NC전, 제한된 기회 속에서도 장타의 힘을 다시 보여준 잠실 솔로포.",
+    videoId: "24tCieqYXoQ",
+    source: "YouTube · 신동혁",
+  },
+  {
+    date: "2026. 07. 31",
+    label: "THE BREAKOUT",
+    title: "마침내,\n멀티 홈런",
+    detail: "LG전 시즌 첫 홈런과 초대형 두 번째 아치. 데뷔 후 처음 완성한 멀티 홈런 경기.",
+    videoId: "-LffBYuiJ4c",
+    source: "KBO",
+  },
+];
+
+function GameReel({ game, index }: { game: NotableGame; index: number }) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsPlaying(entry.isIntersecting && entry.intersectionRatio >= 0.55),
+      { threshold: [0, 0.55, 0.8] },
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section className="game-reel" ref={sectionRef}>
+      <div className="reel-copy">
+        <div className="reel-meta"><span>{game.label}</span><time>{game.date}</time></div>
+        <h3>{game.title.split("\n").map((line) => <Fragment key={line}>{line}<br /></Fragment>)}</h3>
+        <p>{game.detail}</p>
+        <a href={`https://www.youtube.com/watch?v=${game.videoId}`} target="_blank" rel="noreferrer">소리 켜고 보기 ↗</a>
+      </div>
+      <div className="reel-phone">
+        <div className="reel-screen">
+          {isPlaying ? (
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${game.videoId}?autoplay=1&mute=1&loop=1&playlist=${game.videoId}&controls=0&rel=0&playsinline=1&modestbranding=1`}
+              title={`${game.date} ${game.title.replace("\n", " ")} 영상`}
+              allow="autoplay; encrypted-media; picture-in-picture"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          ) : (
+            <img src={`https://i.ytimg.com/vi/${game.videoId}/hqdefault.jpg`} alt="" />
+          )}
+          <div className="reel-gradient" />
+          <span className="muted-badge">MUTED · AUTO PLAY</span>
+          <small>{game.source}</small>
+        </div>
+      </div>
+      <div className="reel-number">{String(index + 1).padStart(2, "0")}</div>
+    </section>
+  );
+}
 
 export default function Home() {
   const [active, setActive] = useState(0);
@@ -529,6 +632,15 @@ export default function Home() {
             </Fragment>
           );
         })}
+      </div>
+
+      <section className="game-intro">
+        <p>SELECTED GAME TAPE</p>
+        <h2>한 경기로<br />증명한 순간들.</h2>
+        <span>화면에 들어오면 영상이 음소거로 자동 재생됩니다.</span>
+      </section>
+      <div className="game-tapes">
+        {notableGames.map((game, index) => <GameReel game={game} index={index} key={game.date} />)}
       </div>
 
       <footer>

@@ -25,7 +25,7 @@ a { color: inherit; text-decoration: none; }
 .masthead nav a:hover { color: var(--red); }
 .archive-label { justify-self: end; font-size: .62rem; letter-spacing: .28em; opacity: .58; }
 
-.hero, .opening-note, .prologue, .story, footer { position: relative; z-index: 4; }
+.hero, .opening-note, .prologue, .story, .game-intro, .game-reel, footer { position: relative; z-index: 4; }
 .hero { min-height: 100svh; padding: 21vh 5vw 8vh; display: flex; flex-direction: column; justify-content: center; background: radial-gradient(circle at 78% 36%, rgba(215,25,32,.14), transparent 26%); }
 .eyebrow { margin: 0 0 2rem; color: var(--red); font-size: .72rem; font-weight: 800; letter-spacing: .28em; }
 .hero h1 { margin: 0; font-size: clamp(4.2rem, 11vw, 11.5rem); line-height: .82; letter-spacing: -.09em; font-weight: 1000; }
@@ -66,6 +66,30 @@ a { color: inherit; text-decoration: none; }
 .story-count { position: absolute; right: 3.5vw; bottom: 3rem; font-size: 1.3rem; font-weight: 900; color: var(--red); }
 .story-count span { color: #777; font-size: .66rem; margin-left: .25rem; }
 
+.game-intro { min-height: 86svh; padding: 14vh 7vw; background: var(--red); color: #080808; display: flex; flex-direction: column; justify-content: center; }
+.game-intro p { margin: 0 0 2rem; font-size: .72rem; font-weight: 1000; letter-spacing: .25em; }
+.game-intro h2 { margin: 0; font-size: clamp(4rem, 11vw, 11rem); line-height: .82; letter-spacing: -.09em; font-weight: 1000; }
+.game-intro span { margin: 3rem 0 0 auto; font-size: .72rem; font-weight: 900; letter-spacing: .08em; }
+.game-tapes { position: relative; z-index: 4; background: #050505; }
+.game-reel { min-height: 112svh; padding: 12vh 8vw; display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 34vw); gap: 7vw; align-items: center; border-top: 1px solid rgba(255,255,255,.12); overflow: hidden; }
+.game-reel:nth-child(even) { grid-template-columns: minmax(280px, 34vw) minmax(0, 1fr); }
+.game-reel:nth-child(even) .reel-copy { grid-column: 2; grid-row: 1; }
+.game-reel:nth-child(even) .reel-phone { grid-column: 1; grid-row: 1; }
+.reel-copy { position: relative; z-index: 2; }
+.reel-meta { display: flex; gap: 2rem; margin-bottom: 2.5rem; color: var(--red); font-size: .68rem; font-weight: 1000; letter-spacing: .18em; }
+.reel-meta time { color: #777; }
+.reel-copy h3 { margin: 0; font-size: clamp(3.4rem, 8vw, 8.5rem); line-height: .84; letter-spacing: -.09em; font-weight: 1000; }
+.reel-copy p { max-width: 35rem; margin: 2.5rem 0 0; color: #aaa; font-size: clamp(.95rem, 1.3vw, 1.12rem); line-height: 1.8; word-break: keep-all; }
+.reel-copy a { display: inline-block; margin-top: 2rem; padding-bottom: .35rem; border-bottom: 1px solid var(--red); font-size: .7rem; font-weight: 900; letter-spacing: .1em; }
+.reel-phone { position: relative; width: min(100%, 430px); aspect-ratio: 9 / 16; justify-self: center; padding: 9px; border: 1px solid #333; border-radius: 28px; background: #111; box-shadow: 0 40px 120px rgba(0,0,0,.65); }
+.reel-screen { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 20px; background: #090909; }
+.reel-screen iframe, .reel-screen img { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.reel-screen img { object-fit: cover; filter: grayscale(.35) brightness(.72); }
+.reel-gradient { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(0,0,0,.26), transparent 22%, transparent 68%, rgba(0,0,0,.7)); }
+.muted-badge { position: absolute; top: 1rem; left: 1rem; padding: .45rem .6rem; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; background: rgba(0,0,0,.58); font-size: .54rem; font-weight: 900; letter-spacing: .12em; }
+.reel-screen small { position: absolute; left: 1rem; bottom: 1rem; font-size: .58rem; letter-spacing: .1em; }
+.reel-number { position: absolute; right: 2vw; bottom: -3vw; color: #0e0e0e; font-size: 23vw; line-height: .8; font-weight: 1000; letter-spacing: -.08em; pointer-events: none; }
+
 footer { min-height: 90svh; padding: 13vh 6vw 5vh; background: #eae6dd; color: #090909; display: flex; flex-direction: column; justify-content: space-between; }
 .footer-lead { margin: 0; max-width: 1100px; font-size: clamp(3.5rem, 9vw, 9.5rem); line-height: .9; letter-spacing: -.08em; font-weight: 1000; }
 .footer-bottom { display: flex; justify-content: space-between; gap: 2rem; align-items: end; border-top: 1px solid #999; padding-top: 1.5rem; }
@@ -87,6 +111,10 @@ footer { min-height: 90svh; padding: 13vh 6vw 5vh; background: #eae6dd; color: #
   .story-count { right: 5vw; bottom: 2rem; }
   .background-shade { background: linear-gradient(0deg, rgba(3,3,3,.94), rgba(3,3,3,.45) 78%, rgba(3,3,3,.7)); }
   .footer-bottom { flex-direction: column; align-items: start; }
+  .game-reel, .game-reel:nth-child(even) { grid-template-columns: 1fr; gap: 4rem; padding: 10vh 6vw; }
+  .game-reel:nth-child(even) .reel-copy, .game-reel:nth-child(even) .reel-phone { grid-column: 1; grid-row: auto; }
+  .reel-phone { width: min(82vw, 390px); }
+  .game-intro { padding-inline: 6vw; }
 }
 
 @media (prefers-reduced-motion: reduce) {
