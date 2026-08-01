@@ -575,7 +575,7 @@ export default function Home() {
       </div>
 
       <header className="masthead">
-        <a className="brand" href="#top" aria-label="처음으로">KDH<span>00</span></a>
+        <a className="brand" href="#top" aria-label="대한이는터진다 — 처음으로">대한이는<span>터진다</span></a>
         <nav aria-label="연도 바로가기">
           {years.map((year) => <a href={`#year-${year}`} key={year}>{year}</a>)}
         </nav>
