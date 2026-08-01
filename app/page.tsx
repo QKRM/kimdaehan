@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 const refrain =
   "김대한그는누구인가2000년생으로서울특별시에서태어나고등학교시절1학년부터주전을꿰차며4할6푼대타율로이부분2위에올랐다시즌말까지당시3학년선배김혜성과이영민타격상을두고경쟁을치뤘으나당시타율0.4이승엽이더높았고20타석가량더들어선김혜성에게아쉽게밀렸다1학년따리가3학년그것도후에메이저리그포스팅을선언할진짜재능에게비볐다는소리다더군다나당시출루율장타율OPS는더높을정도로엄청난모습을보였다.2018년에는타율5할OPS1.502를기록하며백인천타격상을수상했다참고로2021년에이상을받은김도영의타율.428OPS1.128보다훨씬높았던것이다거기다조야제약프로야구시상식에서아마추어MVP를받기도했다이활약은청소년대표팀에서도이어졌는데후에홈런왕이되는노시환을제끼고청소년국가대표4번타자를먹었으며슈퍼라운드한일전에는지금까지회자되는쓰리런홈런이자그경기결승타를때려내는데때려낸투수가바로당해고시엔의최고스타요시다코에이였다이에당당히서울1번으로두산베어스1차지명을받았고3억5천만원으로당해최고액을받았는데참고로2024년신인김택연과황준서가3억5천으로똑같은금액을받았다배트스피드는정상급이라는평가를받아김태형에게존나칭찬받았으며당시고교야구를본모두가무조건터질선수이새끼가안터지면안된다라는평가를받았다파워수비어깨주루등등모든부분에서툴이있다는평가를받은파이브툴플레이어라고평가받았다프로에들어와2019년시즌내내안타를때려내지못하고군대행2022년돌아와7월3일KT이채호를상대로데뷔첫안타를때려냈으며물오른타격감을보이며7월12일신민혁을상대로데뷔첫홈런을때려냈다김대한의OPS는두산베어스한시대를빛냈던박건우김재환오재일김재호동나이대와비교해봤을때월등했던수준이었으며시즌마지막경기김태형의마지막경기오XX의은퇴식이있던날솔로홈런을때려내며두산팬들의희망임을입증했다";
@@ -18,7 +18,7 @@ type Story = {
   credit: string;
 };
 
-const stories: Story[] = [
+const amateurStories: Story[] = [
   {
     date: "2016. 08. 02",
     year: "2016",
@@ -191,7 +191,246 @@ const stories: Story[] = [
   },
 ];
 
-const years = ["2016", "2017", "2018"];
+const proStories: Story[] = [
+  {
+    date: "2019. 03. 23",
+    year: "2019",
+    source: "연합뉴스",
+    title: "고졸 신인, 개막 엔트리",
+    kicker: "프로 첫 시즌 · 정수빈 이후 10년 만의 기록",
+    summary:
+      "쟁쟁한 외야 선배들 사이에서 고졸 신인이 개막 엔트리에 들었다. 김대한은 신인왕이라는 먼 목표보다 ‘1군에서 내려가지 않겠다’는 첫 다짐으로 프로의 문을 열었다.",
+    quote: "“1군에 들어왔으니까 이 악물고 하겠다.”",
+    url: "https://www.yna.co.kr/view/AKR20190323032700007",
+    image: "https://img1.yna.co.kr/etc/inner/KR/2019/03/23/AKR20190323032700007_01_i_P4.jpg",
+    credit: "사진 연합뉴스 신창용 기자",
+  },
+  {
+    date: "2019. 03. 27",
+    year: "2019",
+    source: "스포츠동아",
+    title: "처음 밟은 1군의 잔디",
+    kicker: "프로 데뷔전 · 첫 선발 출전",
+    summary:
+      "3월 24일 만원 관중 앞에서 데뷔전을 치른 뒤 사흘 만에 첫 선발 기회를 받았다. 결과보다 먼저, 스무 살 김대한은 프로 투수의 공과 잠실의 속도를 몸으로 배웠다.",
+    url: "https://sports.donga.com/sports/article/all/20190327/94753168/1",
+    image: "https://dimg.donga.com/wps/SPORTS/IMAGE/2019/03/27/94753157.1.jpg",
+    credit: "사진 스포츠동아DB",
+  },
+  {
+    date: "2020. 06. 30",
+    year: "2020",
+    source: "중앙일보",
+    title: "멀리 돌아가기 위한 선택",
+    kicker: "현역 입대 결정 · 재정비의 시간",
+    summary:
+      "프로 첫해 19경기를 경험한 뒤, 김대한은 두 번째 시즌 도중 현역 입대를 택했다. 빠른 해결보다 확실한 재정비를 선택했고 2022년의 복귀를 준비했다.",
+    url: "https://sports.news.nate.com/view/20200630n23644",
+    image: "https://thumbnews.nateimg.co.kr/view610///news.nateimg.co.kr/orgImg/jo/2020/06/30/4b8a1bbb-8673-40a5-b573-490a04532fc7.jpg",
+    credit: "사진 일간스포츠",
+  },
+  {
+    date: "2022. 01. 19",
+    year: "2022",
+    source: "OSEN",
+    title: "37번, 다시 시작하는 번호",
+    kicker: "전역을 앞둔 겨울 · 새 등번호",
+    summary:
+      "전역을 앞둔 김대한에게 두산 외야의 상징적인 번호 37번이 주어졌다. 군 복무로 단단해진 시간 뒤, 다시 외야 경쟁에 뛰어드는 선언과도 같은 번호였다.",
+    url: "https://www.cleankbo.com/bbs/board.php?bo_table=news&wr_id=44304",
+    image: "https://file.osen.co.kr/article/2022/01/19/202201191706779463_61e7c722f3dcd.jpeg",
+    credit: "사진 OSEN",
+  },
+  {
+    date: "2022. 07. 03",
+    year: "2022",
+    source: "OSEN",
+    title: "1,197일을 기다린 첫 안타",
+    kicker: "KT전 · 프로 통산 20번째 타석",
+    summary:
+      "전역 후 첫 1군 경기. 8회 이채호의 초구 직구를 중견수 앞으로 보냈다. 2019년 데뷔 뒤 20번째 타석, 길었던 기다림을 끝낸 프로 첫 안타였다.",
+    quote: "스무 살의 조급함을 내려놓고, 스물두 살에 만든 첫 번째.",
+    url: "https://www.osen.co.kr/article/G1111888006",
+    image: "https://file.osen.co.kr/article_thumb/2022/07/05/202207051027771934_62c393f30df00_300x.jpeg",
+    credit: "사진 OSEN",
+  },
+  {
+    date: "2022. 07. 12",
+    year: "2022",
+    source: "스포츠조선",
+    title: "첫 홈런은 역전 스리런",
+    kicker: "창원 NC전 · 신민혁 상대",
+    summary:
+      "0–1로 뒤진 2회, 김대한은 신민혁의 초구 투심을 당겨 좌측 담장을 넘겼다. 데뷔 첫 홈런을 단숨에 경기를 뒤집는 3점포로 장식했다.",
+    quote: "첫 홈런부터, 승부를 바꾸는 스윙이었다.",
+    url: "https://www.chosun.com/sports/sports_photo/2022/07/12/E4UBQZKMKCJUR4SV2VVQOK4ERY/",
+    image: "https://www.chosun.com/resizer/v2/CJGYG4HWCHUAASJ4F5YTOIADQE.jpg?auth=2c626ce28251e91b675491bf80c5fdfb2587ab482f58f6780d7c94589be44fb3&width=640&height=336&smart=true",
+    credit: "사진 스포츠조선",
+  },
+  {
+    date: "2022. 08. 28",
+    year: "2022",
+    source: "파이낸셜뉴스",
+    title: "광주에서 터진 두 번째",
+    kicker: "KIA전 · 시즌 2호 투런",
+    summary:
+      "광주 원정에서 시즌 두 번째 홈런을 투런포로 만들었다. 복귀 시즌 51경기, 타율 0.240과 4홈런, OPS 0.763으로 이어질 가능성의 한 장면이었다.",
+    url: "https://www.fnnews.com/news/202208282051393125",
+    image: "https://file.osen.co.kr/article_thumb/2022/07/05/202207051027771934_62c393f30df00_300x.jpeg",
+    credit: "경기 기록 파이낸셜뉴스 · 사진 OSEN",
+  },
+  {
+    date: "2023. 02. 13",
+    year: "2023",
+    source: "스포츠조선",
+    title: "37번의 다음 계절",
+    kicker: "시드니 스프링캠프 · 외야 주전 경쟁",
+    summary:
+      "군 복무와 첫 안타, 첫 홈런을 지나 맞은 첫 온전한 캠프. 김대한은 ‘두산 외야 중 최고’라는 말을 듣고 싶다며 더 공격적인 주루와 수비 범위를 준비했다.",
+    quote: "“두산 외야 중에서는 최고라는 소리를 듣고 싶다.”",
+    url: "https://www.sportschosun.com/baseball/2023-02-13/202302140100095470012159",
+    image: "https://www.sportschosun.com/article/html/2023/02/13/2023021401000954700121591_w.jpg",
+    credit: "사진 스포츠조선",
+  },
+  {
+    date: "2023. 04. 01",
+    year: "2023",
+    source: "OSEN",
+    title: "멈춰 선 개막, 다시 재활",
+    kicker: "우측 중수골 골절 · 한 달 이상 이탈",
+    summary:
+      "시범경기 마지막 주루에서 손을 다쳤고 정밀검사 결과 중수골 골절 진단을 받았다. 기대 속에 준비한 개막은 미뤄졌지만, 시즌은 거기서 끝나지 않았다.",
+    url: "https://www.osen.co.kr/article/G1112072730",
+    image: "https://file.osen.co.kr/article_thumb/2023/04/01/202304011215772900_6427a2919c36e_300x.jpeg",
+    credit: "사진 OSEN DB",
+  },
+  {
+    date: "2023. 06. 06",
+    year: "2023",
+    source: "OSEN",
+    title: "돌아와서, 현충일 홈런",
+    kicker: "잠실 한화전 · 시즌 1호",
+    summary:
+      "골절을 이겨내고 돌아온 뒤 잠실에서 한화 마운드를 상대로 솔로 홈런을 날렸다. 부상으로 늦어진 계절에 자신의 스윙이 여전히 살아 있음을 알렸다.",
+    url: "https://www.osen.co.kr/article/G1112119200",
+    image: "https://file.osen.co.kr/article_thumb/2023/06/06/202306061501777675_647ecbb2e7b9b_300x.jpg",
+    credit: "사진 OSEN 조은정 기자",
+  },
+  {
+    date: "2024. 01. 16",
+    year: "2024",
+    source: "스포츠경향",
+    title: "기대는 다시 이름을 부른다",
+    kicker: "새 시즌 구상 · 오른손 외야 자원",
+    summary:
+      "2022년에 보여준 장타력과 아직 치르지 못한 풀타임 시즌. 이승엽 감독은 더 강한 타선을 만들 열쇠 중 하나로 다시 김대한의 이름을 꺼냈다.",
+    url: "https://sports.khan.co.kr/article/202401161607003",
+    image: "https://images.khan.co.kr/article/r/1200xX/2024/01/16/news-p.v1.20231214.d272a739ef1b4a929c4a840dd83abb10.jpeg",
+    credit: "사진 스포츠경향 정지윤 기자",
+  },
+  {
+    date: "2024. 04. 10",
+    year: "2024",
+    source: "MK스포츠",
+    title: "문동주를 가른 2타점",
+    kicker: "잠실 한화전 · 이틀 연속 멀티 출루",
+    summary:
+      "전날 2안타와 도루를 만든 데 이어 문동주의 공을 받아쳐 결정적인 2타점 적시타를 기록했다. 김대한은 결과를 좇는 조급함보다 밝게, 오래 버티는 법을 이야기했다.",
+    quote: "“재밌게 웃자. 500타석은 들어가 봐야죠.”",
+    url: "https://www.mk.co.kr/news/sports/10987516",
+    image: "https://images.khan.co.kr/article/r/1200xX/2024/01/16/news-p.v1.20231214.d272a739ef1b4a929c4a840dd83abb10.jpeg",
+    credit: "기사 MK스포츠 · 사진 스포츠경향",
+  },
+  {
+    date: "2024. 06. 19",
+    year: "2024",
+    source: "스포츠서울",
+    title: "잠실을 가른 시즌 첫 아치",
+    kicker: "NC전 · 카스타노 상대 솔로 홈런",
+    summary:
+      "NC 선발 카스타노를 상대로 잠실 좌측 담장을 넘겼다. 제한된 기회 속에서도 한 번의 정확한 타격으로 잠실에서 다시 장타의 힘을 증명했다.",
+    url: "https://www.sportsseoul.com/news/read/1438784",
+    image: "https://file.sportsseoul.com/news/cms/2024/06/19/news-p.v1.20240619.b6dd2d68c5fc408f895f41a009d126f3_P1.jpg",
+    credit: "사진 스포츠서울 박진업 기자",
+  },
+  {
+    date: "2024. 11. 21",
+    year: "2024",
+    source: "스타뉴스",
+    title: "더 나은 스윙을 찾아서",
+    kicker: "미국 개인 훈련 · 타격폼 재설계",
+    summary:
+      "시즌이 끝난 뒤 미국으로 건너가 개인 레슨을 택했다. 익숙한 스윙을 고집하기보다 변화를 받아들이며 다음 기회를 스스로 만들기 위한 겨울이었다.",
+    url: "https://v.daum.net/v/20241121112051662",
+    image: "https://img1.daumcdn.net/thumb/S1200x630/?fname=https://t1.daumcdn.net/news/202411/21/starnews/20241121112054095zejw.jpg",
+    credit: "사진 스타뉴스",
+  },
+  {
+    date: "2025. 03. 14",
+    year: "2025",
+    source: "연합뉴스",
+    title: "또 한 번 늦어진 출발",
+    kicker: "내복사근 부상 · 개막 합류 불발",
+    summary:
+      "새 타격폼으로 준비한 시즌이었지만 내복사근 부상으로 개막 합류가 미뤄졌다. 반복되는 공백 속에서도 복귀를 위한 재활과 퓨처스 실전을 다시 밟았다.",
+    url: "https://cb.yna.co.kr/gate/big5/m-cn.yna.co.kr/view/AKR20250314068000007",
+    image: "https://img.yna.co.kr/etc/inner/KR/2025/03/14/AKR20250314068000007_01_i_P4.jpg",
+    credit: "사진 연합뉴스",
+  },
+  {
+    date: "2025. 06. 06",
+    year: "2025",
+    source: "스포츠조선",
+    title: "다시, 현충일의 김대한",
+    kicker: "롯데전 · 174.5km/h 타구",
+    summary:
+      "나균안의 커터를 받아친 공은 시속 174.5km, 120m를 날아갔다. 2023년에 이어 2년 만의 현충일 홈런이자 1군 복귀 뒤 7경기째 만든 시즌 첫 아치였다.",
+    quote: "이름처럼 기억되는 날, 결과로 답한 한 번의 스윙.",
+    url: "https://www.sportschosun.com/baseball/2025-06-06/202506060100040140005477",
+    image: "https://www.sportschosun.com/article/html/2025/06/06/2025060601000401400054771_w.jpg",
+    credit: "사진 스포츠조선 박재만 기자",
+  },
+  {
+    date: "2025. 07. 23",
+    year: "2025",
+    source: "뉴시스",
+    title: "다시 받은 1군의 자리",
+    kicker: "시즌 두 번째 콜업 · 결과로 증명할 시간",
+    summary:
+      "퓨처스리그에서 타격감을 가다듬은 뒤 다시 1군 엔트리에 이름을 올렸다. 기회가 영원하지 않다는 냉정함 속에서, 또 한 번 자신의 타석을 얻었다.",
+    url: "https://www.newsis.com/view/NISX20250723_0003263660",
+    image: "https://img1.newsis.com/2023/06/20/NISI20230620_0019929039_web.jpg",
+    credit: "사진 뉴시스",
+  },
+  {
+    date: "2025. 12. 23",
+    year: "2025",
+    source: "스포츠서울",
+    title: "끝나지 않은 외야의 질문",
+    kicker: "2026시즌 전망 · 다시 주어진 경쟁",
+    summary:
+      "2025년 16경기와 한 개의 홈런. 숫자는 아쉬웠지만 두산의 외야 구상에서 김대한의 힘과 가능성은 여전히 중요한 선택지로 남았다.",
+    url: "https://www.sportsseoul.com/news/read/1573151",
+    image: "https://file.sportsseoul.com/news/cms/2025/12/23/news-p.v1.20250806.9e476c826110428384a63d6fcf7cdaa2_P1.jpg",
+    credit: "사진 스포츠서울",
+  },
+  {
+    date: "2026. 01. 19",
+    year: "2026",
+    source: "스포츠서울",
+    title: "0에서, 다시 시작",
+    kicker: "2026 스프링캠프 · 무한 경쟁",
+    summary:
+      "새 사령탑과 새 판을 짜는 두산. 비어 있는 외야 자리를 두고 모든 선수가 0에서 경쟁을 시작한다. 김대한의 다음 장도 아직 쓰이는 중이다.",
+    quote: "기대는 기록이 아니라, 다음 타석을 향한 움직임이다.",
+    url: "https://www.sportsseoul.com/news/read/1579470",
+    image: "https://file.sportsseoul.com/news/cms/2026/01/19/news-p.v1.20260115.883743f236104470baedcab4fcd54722_P1.jpg",
+    credit: "사진 스포츠서울",
+  },
+];
+
+const stories = [...amateurStories, ...proStories];
+const years = ["2016", "2018", "2019", "2022", "2024", "2026"];
 
 export default function Home() {
   const [active, setActive] = useState(0);
@@ -241,9 +480,9 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
-        <p className="eyebrow">KIM DAE HAN · HIGH SCHOOL YEARS</p>
+        <p className="eyebrow">KIM DAE HAN · THE COMPLETE TIMELINE</p>
         <h1><span>김대한,</span><br />그는 누구인가.</h1>
-        <p className="hero-copy">휘문고 1학년 주전에서<br />대한민국 청소년대표 4번까지.</p>
+        <p className="hero-copy">휘문고 1학년 주전에서<br />두산 베어스의 오늘까지.</p>
         <div className="scroll-cue"><span />아래로, 그의 시작</div>
       </section>
 
@@ -260,11 +499,18 @@ export default function Home() {
         {stories.map((story, index) => {
           const showYear = index === 0 || stories[index - 1].year !== story.year;
           return (
+            <Fragment key={`${story.date}-${story.title}`}>
+            {index === amateurStories.length && (
+              <section className="prologue">
+                <p>2019 · SEOUL · JAMSIL</p>
+                <h2>이제,<br />프로의 시간.</h2>
+                <span>데뷔와 기다림, 첫 안타와 홈런, 그리고 계속되는 다음 타석.</span>
+              </section>
+            )}
             <section
               className="story"
               data-story={index}
               id={showYear ? `year-${story.year}` : undefined}
-              key={`${story.date}-${story.title}`}
             >
               {showYear && <div className="year-marker"><span>{story.year}</span><i /></div>}
               <article className="story-card">
@@ -280,6 +526,7 @@ export default function Home() {
               </article>
               <div className="story-count">{String(index + 1).padStart(2, "0")}<span>/{stories.length}</span></div>
             </section>
+            </Fragment>
           );
         })}
       </div>
@@ -287,7 +534,7 @@ export default function Home() {
       <footer>
         <p className="footer-lead">기대는 사라지지 않는다.<br />기록 속에서 다시 시작할 뿐.</p>
         <div className="footer-bottom">
-          <p>공개 웹에서 확인 가능한 2016–2018년 기사와 기록을 날짜순으로 재구성했습니다. 기사 문장은 요약·재서술했으며 사진 저작권은 각 매체와 촬영자에게 있습니다.</p>
+          <p>공개 웹에서 확인 가능한 2016–2026년 기사와 기록을 날짜순으로 재구성했습니다. 기사 문장은 요약·재서술했으며 사진 저작권은 각 매체와 촬영자에게 있습니다.</p>
           <a href="#top">처음으로 ↑</a>
         </div>
       </footer>

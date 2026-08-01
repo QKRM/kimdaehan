@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import "./globals.css";
 
 const title = "김대한, 그는 누구인가 — RESPECT ARCHIVE";
-const description = "휘문고 1학년 주전부터 청소년대표 4번까지, 김대한의 고교 시절 기사 아카이브.";
+const description = "휘문고 1학년 주전부터 청소년대표 4번, 두산 베어스의 오늘까지 이어지는 김대한 기사 아카이브.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
