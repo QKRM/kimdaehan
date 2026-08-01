@@ -8,8 +8,8 @@ a { color: inherit; text-decoration: none; }
 ::selection { background: var(--red); color: white; }
 
 .kinetic-text { position: fixed; inset: 0; z-index: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: space-around; pointer-events: none; background: #050505; }
-.ticker { display: flex; width: max-content; white-space: nowrap; font-size: clamp(3rem, 8vw, 9rem); font-weight: 900; line-height: .82; letter-spacing: -.08em; color: #101010; animation: crawl 100s linear infinite; }
-.ticker.reverse { animation-direction: reverse; animation-duration: 130s; }
+.ticker { display: flex; width: max-content; white-space: nowrap; font-size: clamp(3rem, 8vw, 9rem); font-weight: 900; line-height: .82; letter-spacing: -.08em; color: #101010; animation: crawl 200s linear infinite; }
+.ticker.reverse { animation-direction: reverse; animation-duration: 260s; }
 .ticker span { padding-right: 4rem; }
 @keyframes crawl { to { transform: translateX(-50%); } }
 
