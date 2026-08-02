@@ -536,7 +536,8 @@ function GameReel({ game, index }: { game: NotableGame; index: number }) {
 }
 
 const worshipCounterBase =
-  "https://api.counterapi.dev/v1/kimdaehan-respect-archive";
+  "https://countapi.mileshilliard.com/api/v1";
+const worshipCounterPrefix = "kimdaehan_respect_archive_";
 
 function getKoreaDateKey() {
   return new Intl.DateTimeFormat("en-CA", {
@@ -566,14 +567,15 @@ function getCounterValue(payload: unknown) {
 }
 
 async function fetchWorshipCounter(name: string, increment = false) {
-  const action = increment ? "/up" : "";
+  const action = increment ? "hit" : "get";
+  const key = `${worshipCounterPrefix}${name}`;
   const response = await fetch(
-    `${worshipCounterBase}/${encodeURIComponent(name)}${action}`,
+    `${worshipCounterBase}/${action}/${encodeURIComponent(key)}`,
     { cache: "no-store" },
   );
 
   if (!response.ok) {
-    if (!increment && (response.status === 400 || response.status === 404)) {
+    if (!increment && response.status === 404) {
       return 0;
     }
     throw new Error("숭배 카운터를 불러오지 못했습니다.");
@@ -620,7 +622,23 @@ export default function Home() {
 
   async function handleWorship() {
     if (isWorshipping) return;
+    const optimisticToday = todayWorships + 1;
+    const optimisticTotal = totalWorships + 1;
+
     setIsWorshipping(true);
+    setTodayWorships(optimisticToday);
+    setTotalWorships(optimisticTotal);
+    setWorshipNotice(
+      `대한이는터진다. 오늘 ${worshipNumber.format(optimisticToday)}명이 숭배하였습니다.`,
+    );
+    setShowWorshipNotice(true);
+    if (worshipNoticeTimer.current) {
+      clearTimeout(worshipNoticeTimer.current);
+    }
+    worshipNoticeTimer.current = setTimeout(
+      () => setShowWorshipNotice(false),
+      3200,
+    );
 
     try {
       const todayCounter = `worship-${getKoreaDateKey()}`;
@@ -634,13 +652,15 @@ export default function Home() {
         `대한이는터진다. 오늘 ${worshipNumber.format(today)}명이 숭배하였습니다.`,
       );
     } catch {
+      setTodayWorships(todayWorships);
+      setTotalWorships(totalWorships);
       setWorshipNotice("숭배를 기록하지 못했습니다. 잠시 후 다시 눌러주세요.");
     } finally {
       setIsWorshipping(false);
-      setShowWorshipNotice(true);
       if (worshipNoticeTimer.current) {
         clearTimeout(worshipNoticeTimer.current);
       }
+      setShowWorshipNotice(true);
       worshipNoticeTimer.current = setTimeout(
         () => setShowWorshipNotice(false),
         3200,
