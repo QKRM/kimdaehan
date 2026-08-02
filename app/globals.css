@@ -25,6 +25,18 @@ a { color: inherit; text-decoration: none; }
 .masthead nav a:hover { color: var(--red); }
 .archive-label { justify-self: end; font-size: .62rem; letter-spacing: .28em; opacity: .58; }
 
+.worship-button { position: fixed; z-index: 40; top: 50%; right: clamp(1rem, 2.7vw, 3rem); width: clamp(96px, 8.5vw, 124px); aspect-ratio: 1; padding: 0; transform: translateY(-50%); border: 1px solid rgba(0,0,0,.72); border-radius: 50%; background: var(--red); color: #080808; cursor: pointer; box-shadow: 0 14px 45px rgba(0,0,0,.45), 0 0 0 6px rgba(215,25,32,.12); font: inherit; transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease; }
+.worship-button span { display: block; font-size: clamp(1.15rem, 1.7vw, 1.65rem); font-weight: 1000; line-height: .92; letter-spacing: -.06em; }
+.worship-button:hover { transform: translateY(-50%) scale(1.055); box-shadow: 0 18px 56px rgba(0,0,0,.55), 0 0 0 9px rgba(215,25,32,.15); }
+.worship-button:active { transform: translateY(-50%) scale(.96); }
+.worship-button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
+.worship-button:disabled { cursor: wait; opacity: .68; }
+
+.worship-toast { position: fixed; z-index: 45; left: 50%; bottom: 4.5rem; width: max-content; max-width: calc(100vw - 2rem); padding: .75rem 1rem; transform: translate(-50%, 14px); border: 1px solid rgba(215,25,32,.72); border-radius: 4px; background: rgba(5,5,5,.94); color: #f1eee7; box-shadow: 0 12px 38px rgba(0,0,0,.48); opacity: 0; pointer-events: none; font-size: clamp(.74rem, 1.1vw, .9rem); font-weight: 800; letter-spacing: -.02em; text-align: center; transition: opacity .22s ease, transform .22s ease; }
+.worship-toast.is-visible { transform: translate(-50%, 0); opacity: 1; }
+.worship-total { position: fixed; z-index: 40; left: 50%; bottom: 1.15rem; transform: translateX(-50%); width: max-content; max-width: calc(100vw - 2rem); color: white; text-shadow: 0 2px 12px #000, 0 1px 3px #000; font-size: clamp(.72rem, 1.1vw, .88rem); font-weight: 800; letter-spacing: -.02em; text-align: center; }
+.worship-total strong { color: var(--red); font-size: 1.08em; }
+
 .hero, .opening-note, .prologue, .story, .game-intro, .game-reel, footer { position: relative; z-index: 4; }
 .hero { min-height: 100svh; padding: 21vh 5vw 8vh; display: flex; flex-direction: column; justify-content: center; background: radial-gradient(circle at 78% 36%, rgba(215,25,32,.14), transparent 26%); }
 .eyebrow { margin: 0 0 2rem; color: var(--red); font-size: .72rem; font-weight: 800; letter-spacing: .28em; }
@@ -100,6 +112,10 @@ footer { min-height: 90svh; padding: 13vh 6vw 5vh; background: #eae6dd; color: #
   .masthead { height: 62px; grid-template-columns: 1fr auto; padding: 0 5vw; }
   .masthead nav { gap: 1rem; }
   .archive-label { display: none; }
+  .worship-button { right: .75rem; width: 82px; }
+  .worship-button span { font-size: 1.05rem; }
+  .worship-toast { bottom: 4rem; padding: .7rem .85rem; }
+  .worship-total { bottom: .85rem; font-size: .7rem; }
   .hero { padding-inline: 6vw; }
   .hero-copy { margin-left: 0; }
   .opening-note { grid-template-columns: 1fr; padding-inline: 7vw; }
@@ -121,4 +137,5 @@ footer { min-height: 90svh; padding: 13vh 6vw 5vh; background: #eae6dd; color: #
   html { scroll-behavior: auto; }
   .ticker, .scroll-cue span { animation: none; }
   .background { transition: none; }
+  .worship-button, .worship-toast { transition: none; }
 }

@@ -535,8 +535,118 @@ function GameReel({ game, index }: { game: NotableGame; index: number }) {
   );
 }
 
+const worshipCounterBase =
+  "https://api.counterapi.dev/v1/kimdaehan-respect-archive";
+
+function getKoreaDateKey() {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+}
+
+function getCounterValue(payload: unknown) {
+  if (!payload || typeof payload !== "object") return 0;
+
+  const response = payload as {
+    value?: unknown;
+    count?: unknown;
+    data?: { value?: unknown; count?: unknown };
+  };
+  const rawValue =
+    response.value ??
+    response.count ??
+    response.data?.value ??
+    response.data?.count ??
+    0;
+  const value = Number(rawValue);
+  return Number.isFinite(value) ? value : 0;
+}
+
+async function fetchWorshipCounter(name: string, increment = false) {
+  const action = increment ? "/up" : "";
+  const response = await fetch(
+    `${worshipCounterBase}/${encodeURIComponent(name)}${action}`,
+    { cache: "no-store" },
+  );
+
+  if (!response.ok) {
+    if (!increment && (response.status === 400 || response.status === 404)) {
+      return 0;
+    }
+    throw new Error("숭배 카운터를 불러오지 못했습니다.");
+  }
+
+  return getCounterValue(await response.json());
+}
+
+const worshipNumber = new Intl.NumberFormat("ko-KR");
+
 export default function Home() {
   const [active, setActive] = useState(0);
+  const [todayWorships, setTodayWorships] = useState(0);
+  const [totalWorships, setTotalWorships] = useState(0);
+  const [isWorshipping, setIsWorshipping] = useState(false);
+  const [worshipNotice, setWorshipNotice] = useState("");
+  const [showWorshipNotice, setShowWorshipNotice] = useState(false);
+  const worshipNoticeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    const todayCounter = `worship-${getKoreaDateKey()}`;
+
+    Promise.all([
+      fetchWorshipCounter(todayCounter),
+      fetchWorshipCounter("worship-total"),
+    ])
+      .then(([today, total]) => {
+        if (cancelled) return;
+        setTodayWorships(today);
+        setTotalWorships(total);
+      })
+      .catch(() => {
+        // Keep the zero-value fallback when the public counter is unavailable.
+      });
+
+    return () => {
+      cancelled = true;
+      if (worshipNoticeTimer.current) {
+        clearTimeout(worshipNoticeTimer.current);
+      }
+    };
+  }, []);
+
+  async function handleWorship() {
+    if (isWorshipping) return;
+    setIsWorshipping(true);
+
+    try {
+      const todayCounter = `worship-${getKoreaDateKey()}`;
+      const [today, total] = await Promise.all([
+        fetchWorshipCounter(todayCounter, true),
+        fetchWorshipCounter("worship-total", true),
+      ]);
+      setTodayWorships(today);
+      setTotalWorships(total);
+      setWorshipNotice(
+        `대한이는터진다. 오늘 ${worshipNumber.format(today)}명이 숭배하였습니다.`,
+      );
+    } catch {
+      setWorshipNotice("숭배를 기록하지 못했습니다. 잠시 후 다시 눌러주세요.");
+    } finally {
+      setIsWorshipping(false);
+      setShowWorshipNotice(true);
+      if (worshipNoticeTimer.current) {
+        clearTimeout(worshipNoticeTimer.current);
+      }
+      worshipNoticeTimer.current = setTimeout(
+        () => setShowWorshipNotice(false),
+        3200,
+      );
+    }
+  }
 
   useEffect(() => {
     const sections = [...document.querySelectorAll<HTMLElement>("[data-story]")];
@@ -555,6 +665,27 @@ export default function Home() {
 
   return (
     <main>
+      <button
+        className="worship-button"
+        type="button"
+        onClick={handleWorship}
+        disabled={isWorshipping}
+        aria-label={`상습 숭배하기. 오늘 ${worshipNumber.format(todayWorships)}명이 숭배했습니다.`}
+      >
+        <span>상습</span>
+        <span>숭배</span>
+      </button>
+      <div
+        className={`worship-toast ${showWorshipNotice ? "is-visible" : ""}`}
+        role="status"
+        aria-live="polite"
+      >
+        {worshipNotice}
+      </div>
+      <div className="worship-total" aria-live="polite">
+        지금까지 <strong>{worshipNumber.format(totalWorships)}</strong>명이 숭배하였습니다.
+      </div>
+
       <div className="kinetic-text" aria-hidden="true">
         {[0, 1, 2, 3].map((row) => (
           <div className={row % 2 ? "ticker reverse" : "ticker"} key={row}>
