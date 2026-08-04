@@ -1,10 +1,10 @@
 {
-  "captured_at": "2026-08-04T14:38:52.711Z",
+  "captured_at": "2026-08-04T16:30:24.932Z",
   "timezone": "Asia/Seoul",
   "source": "countapi.mileshilliard.com",
-  "total": 112922,
+  "total": 115265,
   "today": {
-    "date": "2026-08-04",
-    "count": 7657
+    "date": "2026-08-05",
+    "count": 1802
   }
 }
